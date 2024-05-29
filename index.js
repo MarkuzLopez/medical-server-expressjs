@@ -9,12 +9,17 @@ app.use(cors());
 // DB
 dbConnection();
 
-app.get('/', (req, res) => { 
-    res.json({
-        ok: true,
-        msg: 'Hola Mundo'
-    })
-})
+// Lectura y parseo del body
+app.use(express.json());
+
+//routes:
+app.use('/api/usuarios', require('./routes/usuariosRoutes'));
+// app.get('/', (req, res) => { 
+//     res.json({
+//         ok: true,
+//         msg: 'Hola Mundo'
+//     })
+// })
 
 
 app.listen(3000, () => { 
