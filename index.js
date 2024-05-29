@@ -1,15 +1,15 @@
-const expres = require('express');
+const express = require('express');
 var cors = require('cors')
 const { dbConnection } = require('./database/config')
 
 // crea el servidor de express
-const app = expres();
+const app = express();
 //CORS
 app.use(cors());
 // DB
 dbConnection();
 
-// Lectura y parseo del body
+// Lectura y parseo del body para peticiones POST
 app.use(express.json());
 
 //routes:
