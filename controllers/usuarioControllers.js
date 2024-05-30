@@ -1,5 +1,5 @@
 const Usuario = require("../models/usuario");
-const { validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
 
 const getUsuarios = async (req, res) => {
   const usuarios = await Usuario.find({}, "nombre email role google");
@@ -11,7 +11,9 @@ const getUsuarios = async (req, res) => {
 };
 
 const crearUsuario = async (req, res) => {
-  const { email } = req.body;
+  
+    const { email, password } = req.body;
+
 // TODO remove for new field in middleware and routes users
 //   const erros = validationResult(req);
 //   if (!erros.isEmpty()) {
@@ -22,7 +24,8 @@ const crearUsuario = async (req, res) => {
 //   }
 
   try {
-    const emailExist = Usuario.findOne({ email });
+
+    const emailExist = await Usuario.findOne({ email });
 
     if (emailExist) {
       return res.status(400).json({
@@ -32,6 +35,10 @@ const crearUsuario = async (req, res) => {
     }
 
     const usuario = Usuario(req.body);
+    // Encriptar la contraseña
+    const salt = bcrypt.genSaltSync(); //numero o da generada.
+    usuario.password = bcrypt.hashSync(password, salt);
+
     await usuario.save();
 
     res.json({
