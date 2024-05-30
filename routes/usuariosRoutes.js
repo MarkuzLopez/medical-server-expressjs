@@ -7,6 +7,7 @@ const {
   getUsuarios,
   crearUsuario,
   actualizarUsuario,
+  eliminarUsuario,
 } = require("../controllers/usuarioControllers");
 const { validarCampos } = require("../middlewares/validarCampos");
 
@@ -33,5 +34,7 @@ router.put(
   check("email", "el email es obligatorio").isEmail(),
   actualizarUsuario
 );
+
+router.delete('/delete/:id', eliminarUsuario)
 
 module.exports = router;
