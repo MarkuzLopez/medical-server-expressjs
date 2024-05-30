@@ -14,6 +14,8 @@ app.use(express.json());
 
 //routes:
 app.use('/api/usuarios', require('./routes/usuariosRoutes'));
+app.use('/api/auth', require('./routes/authRoutes'));
+
 // app.get('/', (req, res) => { 
 //     res.json({
 //         ok: true,

@@ -3,12 +3,14 @@
  */
 const { check } = require("express-validator");
 const { Router } = require("express");
+
 const {
   getUsuarios,
   crearUsuario,
   actualizarUsuario,
   eliminarUsuario,
 } = require("../controllers/usuarioControllers");
+
 const { validarCampos } = require("../middlewares/validarCampos");
 
 const router = Router();
