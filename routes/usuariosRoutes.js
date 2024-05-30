@@ -12,10 +12,11 @@ const {
 } = require("../controllers/usuarioControllers");
 
 const { validarCampos } = require("../middlewares/validarCampos");
+const { validarJwt } = require("../jwt/jwt");
 
 const router = Router();
 
-router.get("/", getUsuarios);
+router.get("/", validarJwt, getUsuarios);
 router.post(
   "/create",
   //middelware
