@@ -32,12 +32,13 @@ router.post(
 
 router.put(
   "/update/:id",
-  check("nombre", "El nombre es obligatorio").not().isEmpty(),
-  check("password", "el password es obligatorio").not().isEmpty(),
+  check("nombre", "El nombre es obligatorio").not().isEmpty(),  
   check("email", "el email es obligatorio").isEmail(),
+  check('role', 'el role es obligatorio').not().isEmpty(),
+  validarJwt,
   actualizarUsuario
 );
 
-router.delete('/delete/:id', eliminarUsuario)
+router.delete('/delete/:id', validarJwt, eliminarUsuario)
 
 module.exports = router;
