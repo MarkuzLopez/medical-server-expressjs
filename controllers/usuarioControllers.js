@@ -5,7 +5,7 @@ const { generarJWT } = require('../jwt/jwt');
 
 const getUsuarios = async (req, res) => {
 
-  const desde = await Number(req.query.desde); //trae todoso los registros 
+  const desde = await Number(req.query.desde) || 0; //trae todoso los registros 
 // de la forma asyncronoa, se ejecuta una detras de la otra.  
   
   // const usuarios = await Usuario.find({}, "nombre email role google")
