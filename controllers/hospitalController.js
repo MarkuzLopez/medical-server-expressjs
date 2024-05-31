@@ -1,11 +1,25 @@
 const { response } = require("express");
 const Hospital = require("../models/hospital");
 
-const getHospitales = (req, res = response) => { 
-    res.json( { 
-        ok: true,
-        msg: 'getHospitales'
-    })
+const getHospitales = async (req, res = response) => {
+    const hospitales = await Hospital.find()
+                                .populate('usuario', 'nombre img')
+                                //populate para identificcar otra collexion
+                                // ('collection', 'campos ')
+    try {        
+
+        res.json( { 
+            ok: true,
+            hospitales
+        })
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        })
+    }
 }
 
 const crearHospital = async (req, res = response) => { 

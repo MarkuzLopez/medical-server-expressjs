@@ -2,10 +2,14 @@ const { response } = require("express");
 const Medico = require('../models/medico');
 const Hospital = require('../models/hospital');
 
-const getMedicos = (req, res = response) => { 
+const getMedicos = async (req, res = response) => { 
+    
+    const medicoDB = await Medico.find()
+                            .populate('hospital', 'nombre')
+                            .populate('usuario', 'nombre img');
     res.json({ 
         ok: true,
-        msg: 'getMedicos'
+        medicoDB
     })
 }
 
