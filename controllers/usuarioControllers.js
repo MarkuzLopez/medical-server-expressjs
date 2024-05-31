@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const { generarJWT } = require('../jwt/jwt');
 
 const getUsuarios = async (req, res) => {
+  console.log(req.params, 'asda');
   const usuarios = await Usuario.find({}, "nombre email role google");
 
   res.json({
@@ -67,7 +68,8 @@ const crearUsuario = async (req, res) => {
 
 const actualizarUsuario = async (req, res = response ) => { 
 
-    const uid = req.params.id;    
+    const uid = req.params.id;
+    console.log(req.params, 'asddsa');
     try {
 
         const existUserDB =  await Usuario.findById(uid);
