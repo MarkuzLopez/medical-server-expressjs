@@ -12,6 +12,7 @@ router.post('/create',
 [
     validarJwt,
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+    check('hospital', 'El hospital id debe de ser valido').isMongoId(),// para referencias que utilia uid mongoose
     validarCampos
 ],
 crearMedico);
