@@ -4,13 +4,30 @@ const bcrypt = require('bcryptjs');
 const { generarJWT } = require('../jwt/jwt');
 
 const getUsuarios = async (req, res) => {
-  console.log(req.params, 'asda');
-  const usuarios = await Usuario.find({}, "nombre email role google");
+
+  const desde = await Number(req.query.desde); //trae todoso los registros 
+// de la forma asyncronoa, se ejecuta una detras de la otra.  
+  
+  // const usuarios = await Usuario.find({}, "nombre email role google")
+  //                             .skip(desde) //para saltarse o empezar dewsde el parametro
+  //                             .limit(5); //para limitar la cantidad de registros
+  // // const total = await Usuario.count();
+
+  /**
+   * para ejeutar las promesas de manera simultanea
+   * sin necesidad de esperar una tras la otra
+   */
+  const [usuarios, total ] = await Promise.all([
+    Usuario.find({}, "nombre email role google")
+                  .skip(desde)
+                  .limit(5),
+    Usuario.countDocuments()
+  ])
 
   res.json({
     ok: true,
     usuarios,
-    uid: req.uid
+    total
   });
 };
 
