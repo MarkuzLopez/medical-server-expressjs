@@ -1,6 +1,7 @@
 const express = require('express');
 var cors = require('cors')
-const { dbConnection } = require('./database/config')
+const { dbConnection } = require('./database/config');
+const { swaggerUi, swaggerSpec } = require('./swagger');
 
 // crea el servidor de express
 const app = express();
@@ -15,6 +16,10 @@ app.use(express.json());
 //routes:
 app.use('/api/usuarios', require('./routes/usuariosRoutes'));
 app.use('/api/auth', require('./routes/authRoutes'));
+
+// Ruta para la documentación de Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 // app.get('/', (req, res) => { 
 //     res.json({
