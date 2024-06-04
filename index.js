@@ -19,6 +19,7 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/hospitales', require('./routes/hospitalRoutes'));
 app.use('/api/medicos', require('./routes/medicosRoutes'));
 app.use('/api/todo', require('./routes/busquedaRoutes'));
+app.use('/api/upload', require('./routes/uploadRoute') );
 // Ruta para la documentación de Swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
