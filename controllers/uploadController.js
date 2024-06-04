@@ -1,5 +1,6 @@
 const { response } = require("express");
 const { v4: uuidv4 } = require("uuid");
+const { actualizarImagen } = require("../helpers/actualizarImagen");
 
 const fileUpload = async (req, res = response) => {
   const tipo = req.params.tipo;
@@ -42,7 +43,7 @@ const fileUpload = async (req, res = response) => {
   //todo path para guardar la imagen, en el folder creado
   const uploadPath = `./uploads/${ tipo }/${ nombreArchivo}`;
   
-  //   uploadPath = __dirname + '/somewhere/on/your/server/' + sampleFile.name;
+   // Use the mv() method to place the file somewhere on your server
   file.mv(uploadPath, (err) => {
     
     if (err) {
@@ -53,6 +54,9 @@ const fileUpload = async (req, res = response) => {
       });
     }
 
+    //actualizarImagen(tipo, id, path, nombreArvhivo)
+    actualizarImagen(tipo, id, nombreArchivo)
+
     res.json({
       ok: true,
       msg: "fileUpload",
@@ -60,6 +64,7 @@ const fileUpload = async (req, res = response) => {
     });
 
   });
+  
 };
 
 module.exports = {
