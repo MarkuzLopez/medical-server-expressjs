@@ -1,3 +1,5 @@
+const path = require('path');
+const fs = require('fs');
 const { response } = require("express");
 const { v4: uuidv4 } = require("uuid");
 const { actualizarImagen } = require("../helpers/actualizarImagen");
@@ -67,6 +69,26 @@ const fileUpload = async (req, res = response) => {
   
 };
 
+const retornarImagen = (req, res = response) => { 
+
+  const tipo = req.params.tipo;
+  const foto =  req.params.foto;
+  console.log(tipo);
+  console.log(foto, 'assa');
+
+  const pathImg = path.join( __dirname, `../uploads/${tipo}/${foto}`);
+
+  //imagen por defectpo.
+  if(fs.existsSync(pathImg)) {
+    res.sendFile(pathImg)
+  } else {
+    const pathImg = path.join( __dirname, `../uploads/no-img.jpeg`);
+    res.sendFile(pathImg)
+  }  
+
+}
+
 module.exports = {
   fileUpload,
+  retornarImagen
 };
