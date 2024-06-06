@@ -17,8 +17,8 @@ router.post('/create',
 ],
 crearMedico);
 
-router.put('/update/:id', actualizarMedico);
+router.put('/update/:id', validarJwt, actualizarMedico);
 
-router.delete('/delete/:if', eliminarMedico);
+router.delete('/delete/:id', validarJwt, eliminarMedico);
 
 module.exports = router;
