@@ -7,6 +7,9 @@ const { swaggerUi, swaggerSpec } = require('./swagger');
 const app = express();
 //CORS
 app.use(cors());
+
+// folder public 
+app.use(express.static('public'));
 // DB
 dbConnection();
 
