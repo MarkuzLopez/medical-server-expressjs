@@ -6,8 +6,7 @@ const getHospitales = async (req, res = response) => {
                                 .populate('usuario', 'nombre img')
                                 //populate para identificcar otra collexion
                                 // ('collection', 'campos ')
-    try {        
-
+    try {
         res.json( { 
             ok: true,
             hospitales
